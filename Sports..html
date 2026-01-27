@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EliteAthlex | International Athletics</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{background:#000;color:#fff;overflow-x:hidden}
+
+/* LOADER */
+#loader{
+position:fixed;inset:0;
+background:#000;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+#loader h1{
+letter-spacing:5px;
+animation:pulse 1.5s infinite;
+}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* VIDEO */
+video{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+object-fit:cover;
+z-index:-1;
+filter:brightness(40%);
+}
+
+/* HERO */
+.hero{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+.hero h1{
+font-size:4rem;
+letter-spacing:6px;
+animation:reveal 2s ease forwards;
+}
+.hero p{
+margin-top:20px;
+font-size:1.4rem;
+opacity:0;
+animation:fadeUp 2s ease forwards 1.5s;
+}
+@keyframes reveal{
+from{clip-path:inset(0 100% 0 0)}
+to{clip-path:inset(0 0 0 0)}
+}
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(30px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+/* SECTIONS */
+section{padding:100px 10%}
+.title{
+font-size:2.5rem;
+border-left:5px solid gold;
+padding-left:15px;
+margin-bottom:40px;
+}
+
+/* CARDS */
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+.card{
+background:rgba(255,255,255,.08);
+padding:30px;
+border-radius:15px;
+transition:.4s;
+}
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 25px gold;
+}
+
+/* TIMELINE */
+.timeline{
+border-left:3px solid gold;
+padding-left:30px;
+}
+.step{
+margin-bottom:40px;
+opacity:0;
+transform:translateX(-30px);
+transition:1s;
+}
+.step.show{
+opacity:1;
+transform:translateX(0);
+}
+
+/* CONTACT */
+.contact{
+background:rgba(0,0,0,.6);
+padding:40px;
+border-radius:20px;
+}
+
+/* BUTTONS */
+#musicBtn{
+position:fixed;
+bottom:110px;
+right:25px;
+background:gold;
+border:none;
+border-radius:50%;
+padding:15px;
+font-size:18px;
+cursor:pointer;
+}
+
+#whatsapp{
+position:fixed;
+bottom:25px;
+right:25px;
+background:#25D366;
+color:#fff;
+padding:15px 22px;
+border-radius:50px;
+text-decoration:none;
+font-weight:bold;
+}
+
+footer{
+text-align:center;
+padding:30px;
+opacity:.6;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader"><h1>PREPARING CHAMPIONS</h1></div>
+
+<!-- VIDEO -->
+<video autoplay muted loop playsinline>
+  <source src="https://cdn.coverr.co/videos/coverr-athlete-running-on-track-1604/1080p.mp4" type="video/mp4">
+</video>
+
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/08/01/audio_6a5f1e6b3c.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn">🎵</button>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <h1>EliteAthlex</h1>
+    <p>Get U Ready For Internationals & Olympics</p>
+  </div>
+</div>
+
+<!-- MISSION -->
+<section>
+  <div class="title">Our Mission</div>
+  <p>We build Olympic-ready athletes with discipline, elite training and international standards.</p>
+</section>
+
+<!-- SPORTS -->
+<section>
+  <div class="title">Athletics Programs</div>
+  <div class="cards">
+    <div class="card">Track Events</div>
+    <div class="card">Field Events</div>
+    <div class="card">Endurance Training</div>
+    <div class="card">Olympic Conditioning</div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section>
+  <div class="title">Road to Olympics</div>
+  <div class="timeline">
+    <div class="step">Foundation Training</div>
+    <div class="step">National Championships</div>
+    <div class="step">International Exposure</div>
+    <div class="step">Olympic Preparation</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section>
+  <div class="title">Contact</div>
+  <div class="contact">
+    <p>📧 Email: <b>np4574815@gmail.com</b></p>
+    <p>📞 Phone: <b>9305893662</b></p>
+  </div>
+</section>
+
+<footer>© 2026 EliteAthlex | International Athletics</footer>
+
+<a id="whatsapp" href="https://wa.me/919305893662" target="_blank">WhatsApp Us</a>
+
+<script>
+// LOADER
+window.addEventListener("load",()=>{
+setTimeout(()=>document.getElementById("loader").style.display="none",1800);
+});
+
+// AUDIO UNLOCK (Safari Fix)
+const music=document.getElementById("bgMusic");
+document.body.addEventListener("click",()=>{
+music.play().then(()=>music.pause());
+},{once:true});
+
+// MUSIC TOGGLE
+let playing=false;
+document.getElementById("musicBtn").onclick=()=>{
+if(!playing){music.play();musicBtn.innerHTML="⏸️";}
+else{music.pause();musicBtn.innerHTML="🎵";}
+playing=!playing;
+};
+
+// SCROLL ANIMATIONS
+const steps=document.querySelectorAll(".step");
+window.addEventListener("scroll",()=>{
+steps.forEach(s=>{
+if(s.getBoundingClientRect().top<window.innerHeight-100){
+s.classList.add("show");
+}
+});
+});
+</script>
+
+</body>
+</html>
